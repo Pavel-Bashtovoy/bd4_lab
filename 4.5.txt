@@ -1,0 +1,13 @@
+SELECT p.*
+FROM spj t
+JOIN p ON p.n_det = t.n_det
+WHERE t.n_post IN (SELECT s.n_post
+                   FROM s
+                   WHERE s.town ='Афины')
+EXCEPT
+SELECT p.*
+FROM spj t
+JOIN p ON p.n_det = t.n_det
+WHERE NOT t.n_post IN (SELECT s.n_post
+                       FROM s
+                       WHERE s.town='Афины');

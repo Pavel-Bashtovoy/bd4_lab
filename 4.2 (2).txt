@@ -1,0 +1,39 @@
+update p set ves = (case when p.town = 'Рим'
+                         then (select p1.ves ves1
+                               from p p1
+                               where p1.town = 'Париж'
+                               order by p1.ves
+                               limit 1)
+                         else (select p2.ves ves2
+                               from p p2
+                               where p2.town = 'Рим'
+                               order by p2.ves
+                               limit 1)
+                    end) 
+where p.town = 'Рим'
+      or
+      p.town = 'Париж'
+
+
+
+
+
+
+
+select p.n_det, p.ves, p.town,
+       case when p.town = 'Рим'
+            then (select p1.ves ves1
+                  from p p1
+                  where p1.town = 'Париж'
+                  order by p1.ves
+                  limit 1)
+            else (select p2.ves ves2
+                  from p p2
+                  where p2.town = 'Рим'
+                  order by p2.ves
+                  limit 1)
+       end ves_new 
+from p
+where p.town = 'Рим'
+      or
+      p.town = 'Париж'

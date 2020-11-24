@@ -1,0 +1,5 @@
+select count(distinct n_det) 
+from spj
+where n_izd in (select n_izd from spj
+                join p on spj.n_det = p.n_det
+                where p.ves * spj.kol between 5000 and 6000)

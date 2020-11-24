@@ -1,0 +1,10 @@
+select distinct a.n_det, a.kol vol, b.mvol
+from spj a
+join (select t.n_det, max(t.kol) mvol 
+      from spj t
+      join s on s.n_post = t.n_post
+      where s.town = 'Париж'
+      group by t.n_det
+     ) b on b.n_det = a.n_det
+where a.kol <= b.mvol / 2
+order by 1,2

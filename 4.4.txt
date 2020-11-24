@@ -1,0 +1,9 @@
+select n_post 
+from s
+except
+select n_post 
+from spj
+where n_det in (select a.n_det
+                from spj a
+                join j on j.n_izd = a.n_izd
+                where j.town = 'Париж')
